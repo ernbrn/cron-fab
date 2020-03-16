@@ -47,6 +47,24 @@ defmodule Cronfab do
     |> generate_cron
   end
 
+  @doc """
+  Generates a crontab in UTC time. Any unspecified options will default to the every option (*).
+
+  ## Examples
+      iex> Cronfab.generate_crontab!()
+      "* * * * *"
+
+      iex> Cronfab.generate_crontab!(on: :weekends, at: "5:45pm", utc_offset: "-4")
+      "45 21 * * 6,0"
+
+      iex> Cronfab.generate_crontab!(day: :every_day, at: :noon, utc_offset: "-5")
+      "0 17 * * *"
+
+
+      iex> Cronfab.generate_crontab!(on: :thursdays, at: "3:04pm")
+      "4 15 * * 4"
+
+  """
   def generate_crontab!(args \\ []) do
     case generate_crontab(args) do
       {:ok, crontab} -> crontab

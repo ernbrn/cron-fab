@@ -19,6 +19,23 @@ iex> Cronfab.generate_crontab(on: :thursdays, at: "3:04pm")
 {:ok, "4 15 * * 4"}
 ```
 
+or
+
+```elixir
+iex> Cronfab.generate_crontab!()
+"* * * * *"
+
+iex> Cronfab.generate_crontab!(on: :weekends, at: "5:45pm", utc_offset: "-4")
+"45 21 * * 6,0"
+
+iex> Cronfab.generate_crontab!(day: :every_day, at: :noon, utc_offset: "-5")
+"0 17 * * *"
+
+
+iex> Cronfab.generate_crontab!(on: :thursdays, at: "3:04pm")
+"4 15 * * 4"
+```
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
